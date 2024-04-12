@@ -11,7 +11,28 @@ import java.time.LocalDate;
  * @author dam
  */
 public class Prestamo {
-    double monto;
-    double tasaInteres;
-    LocalDate plazo;
+    private double monto;
+    private double tasaInteres;
+    private LocalDate plazo;
+
+    public Prestamo(double monto, double tasaInteres, LocalDate plazo) {
+        this.monto = monto;
+        this.tasaInteres = tasaInteres;
+        this.plazo = plazo;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public double getTasaInteres() {
+        return tasaInteres;
+    }
+
+    public LocalDate getPlazo() {
+        return plazo;
+    }
+    
+    
+    
 }

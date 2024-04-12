@@ -4,15 +4,38 @@
  */
 package modelo;
 
-import utilidades.DNI;
-
 /**
  *
  * @author dam
  */
 public class Titular {
-    String dni;
-    String nombre;
-    String direccion;
-    Prestamo prestamo;
+    private String dni;
+    private String nombre;
+    private String direccion;
+    private Prestamo prestamo;
+
+    public Titular(String dni, String nombre, String direccion, Prestamo prestamo) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.prestamo = prestamo;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public Prestamo getPrestamo() {
+        return prestamo;
+    }
+    
+    
 }

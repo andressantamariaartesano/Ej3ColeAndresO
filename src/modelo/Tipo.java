@@ -9,6 +9,21 @@ package modelo;
  * @author dam
  */
 public class Tipo {
-    int codigo;
-    String denominacion;
+    private int codigo;
+    private String denominacion;
+
+    public Tipo(int codigo, String denominacion) {
+        this.codigo = codigo;
+        this.denominacion = denominacion;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getDenominacion() {
+        return denominacion;
+    }
+    
+    
 }

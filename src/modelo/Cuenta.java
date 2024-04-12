@@ -4,14 +4,32 @@
  */
 package modelo;
 
-import utilidades.DNI;
-
 /**
  *
  * @author dam
  */
 public class Cuenta {
-    String numero;
-    String dni;
-    double saldo;
+    private String numero;
+    private String dni;
+    private double saldo;
+
+    public Cuenta(String numero, String dni, double saldo) {
+        this.numero = numero;
+        this.dni = dni;
+        this.saldo = saldo;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+    
+    
 }
