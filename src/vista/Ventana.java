@@ -181,9 +181,17 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuConsultaTitularesActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+       comprobarLogin();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private boolean comprobarLogin(){
+        String usuario = this.txtUsuario.getText();
+        String contrasenna = new String(this.pswContrasenna.getPassword());
+        boolean correcto = false;
+        
+        return correcto;
+    }
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.txtUsuario.setText("");
         this.pswContrasenna.setText("");
