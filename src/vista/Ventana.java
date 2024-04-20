@@ -4,17 +4,28 @@
  */
 package vista;
 
+import controlador.Banco;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import modelo.Tipo;
+import modelo.Usuario;
+import utilidades.Algoritmos;
+
 /**
  *
  * @author dam
  */
 public class Ventana extends javax.swing.JFrame {
-
+    Banco banco;
+    PanelCajero panelCajero;
+    PanelGerente panelGerente;
     /**
      * Creates new form Window
      */
     public Ventana() {
         initComponents();
+        banco = new Banco();
         jMenuBar1.setVisible(false);
     }
 
@@ -27,7 +38,7 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelLogin = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -72,46 +83,46 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
+        panelLogin.setLayout(panelLoginLayout);
+        panelLoginLayout.setHorizontalGroup(
+            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap(248, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelLoginLayout.createSequentialGroup()
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAceptar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLoginLayout.createSequentialGroup()
+                        .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGap(144, 144, 144)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUsuario)
                             .addComponent(pswContrasenna, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(268, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelLoginLayout.setVerticalGroup(
+            panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap(84, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(pswContrasenna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnAceptar))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(panelLogin, java.awt.BorderLayout.CENTER);
 
         jMenuBar1.setName(""); // NOI18N
         jMenuBar1.setPreferredSize(new java.awt.Dimension(70, 30));
@@ -181,15 +192,80 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuConsultaTitularesActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-       comprobarLogin();
+        validarLogin();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private boolean comprobarLogin(){
+    /**
+     * Método para comprobar si el login es correcto o no En el caso de que el
+     * login y/o la contraseña estén vacios lanza una ventana de error En el
+     * caso de que no sea correcto lanza una ventana de error. En el caso de que
+     * sea correcto inicia sesión.
+     */
+    private void validarLogin() {
         String usuario = this.txtUsuario.getText();
-        String contrasenna = new String(this.pswContrasenna.getPassword());
-        boolean correcto = false;
+        String contrasenna = Algoritmos.getMD5(new String(this.pswContrasenna.getPassword()));
         
-        return correcto;
+        if (loginVacio()) {
+            ventanaAdvertencia("Usario y/o contraseña vacío(s).", "Error de acceso");
+        } else if (banco.loginCorrecto(usuario, contrasenna)){
+            int posicionUsuario = banco.getUsuarios().indexOf(new Usuario(usuario));
+            
+            iniciarSesion(banco.getUsuarios().get(posicionUsuario).getTipo());
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecto", "Error de acceso", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    /**
+     * Comprueba si el login esta vacio
+     * @return Ralse si tiene contenido el login y contraseña, true si esta vacio el login y contraseña
+     */
+    private boolean loginVacio() {
+        boolean vacio = false;
+        
+        if (this.txtUsuario.getText().isEmpty() || new String(this.pswContrasenna.getPassword()).isEmpty()) {
+            vacio = true;
+        }
+        
+        return vacio;
+    }
+
+    /**
+     * Inicia sesión según el tipo de usuario que se ha logueado
+     * @param tipo Tipo de usuario que se ha logueado
+     */
+    private void iniciarSesion(Tipo tipo) {
+        panelLogin.setVisible(false);
+        panelLogin = null;
+        this.jMenuBar1.setVisible(true);
+        switch (tipo.getDenominacion()){
+            case "Gerente" -> {
+                panelGerente = new PanelGerente();
+                mostrarMenuGerente();
+            }
+            case "Cajero" -> {
+                panelCajero = new PanelCajero();
+                mostrarMenuCajero();
+            }
+        }
+    }
+    
+    
+    /**
+     * Muestra los elementos del menú pertenecientes al gerente
+     */
+    private void mostrarMenuGerente() {
+        mnuTransacciones.setVisible(false);
+        mnuPrestamos.setVisible(false);
+    }
+    
+    /**
+     * Muestra los elementos del menú pertenecientes al cajero
+     */
+    private void mostrarMenuCajero() {
+        mnuTitulares.setVisible(false);
+        mnuAperturaCuentas.setVisible(false);
+        mnuGestionPrestamos.setVisible(false);
     }
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -239,7 +315,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem mnuAltaTitulares;
     private javax.swing.JMenu mnuAperturaCuentas;
     private javax.swing.JMenu mnuCerrarSesion;
@@ -255,7 +330,30 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenu mnuTitulares;
     private javax.swing.JMenu mnuTransacciones;
     private javax.swing.JMenuItem mnuValidarPrestamos;
+    private javax.swing.JPanel panelLogin;
     private javax.swing.JPasswordField pswContrasenna;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Muestra una ventana de advertencia con un determinado titulo y mensaje
+     * @param mensaje Mensaje de la ventana
+     * @param titulo Titulo de la ventana
+     */
+    public void ventanaAdvertencia(String mensaje, String titulo) {
+        try {
+            URL url = new URL("https://archivos.andresortega.dev/imagenes/advertencia.png");
+            ImageIcon icono = new ImageIcon(url);
+            JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.ERROR_MESSAGE, icono);
+        } catch (java.net.MalformedURLException ex) {
+            JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    
+
+    
+
+
 }

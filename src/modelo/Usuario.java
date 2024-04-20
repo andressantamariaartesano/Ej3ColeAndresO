@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author dam
@@ -21,6 +23,12 @@ public class Usuario {
         this.codigo = codigo;
     }
 
+    public Usuario(String login) {
+        this.login = login;
+    }
+
+    
+    
     public String getLogin() {
         return login;
     }
@@ -35,6 +43,28 @@ public class Usuario {
 
     public int getCodigo() {
         return codigo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.login);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        return Objects.equals(this.login, other.login);
     }
     
     
