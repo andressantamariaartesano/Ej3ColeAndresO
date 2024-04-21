@@ -196,7 +196,7 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
-     * Método para comprobar si el login es correcto o no En el caso de que el
+     * Comprueba si el login es correcto o no. En el caso de que el
      * login y/o la contraseña estén vacios lanza una ventana de error En el
      * caso de que no sea correcto lanza una ventana de error. En el caso de que
      * sea correcto inicia sesión.
@@ -212,7 +212,7 @@ public class Ventana extends javax.swing.JFrame {
             
             iniciarSesion(banco.getUsuarios().get(posicionUsuario).getTipo());
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecto", "Error de acceso", JOptionPane.ERROR_MESSAGE);
+            ventanaAdvertencia("Usario y/o contraseña vacío(s).", "Error de acceso");
         }
     }
     
