@@ -212,7 +212,7 @@ public class Ventana extends javax.swing.JFrame {
             
             iniciarSesion(banco.getUsuarios().get(posicionUsuario).getTipo());
         } else {
-            ventanaAdvertencia("Usario y/o contraseña vacío(s).", "Error de acceso");
+            ventanaAdvertencia("Usario y/o contraseña incorrecto(s).", "Error de acceso");
         }
     }
     
@@ -344,9 +344,9 @@ public class Ventana extends javax.swing.JFrame {
         try {
             URL url = new URL("https://archivos.andresortega.dev/imagenes/advertencia.png");
             ImageIcon icono = new ImageIcon(url);
-            JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.ERROR_MESSAGE, icono);
+            JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
         } catch (java.net.MalformedURLException ex) {
-            JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE);
         }
 
     }
