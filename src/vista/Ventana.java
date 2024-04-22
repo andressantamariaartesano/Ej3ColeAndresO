@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista;
 
 import controlador.Banco;
@@ -240,11 +236,11 @@ public class Ventana extends javax.swing.JFrame {
         this.jMenuBar1.setVisible(true);
         switch (tipo.getDenominacion()){
             case "Gerente" -> {
-                panelGerente = new PanelGerente();
+                panelGerente = new PanelGerente(banco);
                 mostrarMenuGerente();
             }
             case "Cajero" -> {
-                panelCajero = new PanelCajero();
+                panelCajero = new PanelCajero(banco);
                 mostrarMenuCajero();
             }
         }
@@ -341,14 +337,9 @@ public class Ventana extends javax.swing.JFrame {
      * @param titulo Titulo de la ventana
      */
     public void ventanaAdvertencia(String mensaje, String titulo) {
-        try {
-            URL url = new URL("https://archivos.andresortega.dev/imagenes/advertencia.png");
-            ImageIcon icono = new ImageIcon(url);
-            JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
-        } catch (java.net.MalformedURLException ex) {
-            JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE);
-        }
-
+        String rutaImagen = "src/images/advertencia.png";
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
     }
 
     

@@ -4,17 +4,21 @@
  */
 package vista;
 
+import controlador.Banco;
+
 /**
  *
  * @author Andres
  */
 public class PanelCajero extends javax.swing.JPanel {
-
+    Banco banco;
     /**
      * Creates new form PanelCajero
+     * @param banco Banco
      */
-    public PanelCajero() {
+    public PanelCajero(Banco banco) {
         initComponents();
+        this.banco = banco;
     }
 
     /**

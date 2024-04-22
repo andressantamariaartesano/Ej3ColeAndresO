@@ -4,17 +4,21 @@
  */
 package vista;
 
+import controlador.Banco;
+
 /**
  *
  * @author Andres
  */
 public class PanelGerente extends javax.swing.JPanel {
-
+    Banco banco;
     /**
      * Creates new form PanelGerente
+     * @param banco Banco
      */
-    public PanelGerente() {
+    public PanelGerente(Banco banco) {
         initComponents();
+        this.banco = banco;
     }
 
     /**
