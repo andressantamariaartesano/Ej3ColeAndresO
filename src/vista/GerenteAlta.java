@@ -12,14 +12,14 @@ import javax.swing.JOptionPane;
  *
  * @author Andres
  */
-public class CajeroAlta extends javax.swing.JPanel {
+public class GerenteAlta extends javax.swing.JPanel {
 
     Banco banco;
 
     /**
      * Creates new form CajeroAlta
      */
-    public CajeroAlta(Banco banco) {
+    public GerenteAlta(Banco banco) {
         initComponents();
         this.banco = banco;
     }
@@ -64,7 +64,7 @@ public class CajeroAlta extends javax.swing.JPanel {
         jLabel4.setText("E-mail");
 
         txtEmail.setToolTipText("");
-        txtEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,8 +146,12 @@ public class CajeroAlta extends javax.swing.JPanel {
         String email = txtEmail.getText().trim();
 
         if (comprobarContenido(dni, nombre, direccion, email)) {
-            banco.guardarTitular(dni, nombre, direccion, email);
-            JOptionPane.showMessageDialog(this, "Información", "Titular agregado", HEIGHT);
+            if (!banco.titularExistente(dni)) {
+                banco.guardarTitular(dni, nombre, direccion, email);
+                JOptionPane.showMessageDialog(this, "Información", "Titular agregado", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                ventanaAdvertencia("Titular existente", "Información");
+            }
         }
     }
 

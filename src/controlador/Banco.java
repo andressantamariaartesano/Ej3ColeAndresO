@@ -111,8 +111,8 @@ public class Banco {
     public boolean dniValido(String dni) {
         boolean valido;
         String regexDni = "[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]";
-        boolean regexvalida = dni.matches(regexDni);
-        if (regexvalida) {
+
+        if (dni.matches(regexDni)) {
             if (letraCorrecta(dni)) {
                 valido = true;
             } else {
@@ -151,6 +151,14 @@ public class Banco {
         }
 
         return correcto;
+    }
+
+    public boolean titularExistente(String dni) {
+        boolean existe;
+
+        existe = titulares.contains(new Titular(dni));
+
+        return existe;
     }
 
 }

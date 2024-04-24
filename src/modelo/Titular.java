@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.Objects;
+
 /**
  *
  * @author dam
@@ -22,6 +24,12 @@ public class Titular {
         this.direccion = direccion;
         this.email = email;
     }
+
+    public Titular(String dni) {
+        this.dni = dni;
+    }
+    
+    
 
     public String getDni() {
         return dni;
@@ -42,5 +50,29 @@ public class Titular {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.dni);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Titular other = (Titular) obj;
+        return Objects.equals(this.dni, other.dni);
+    }
+    
+    
     
 }

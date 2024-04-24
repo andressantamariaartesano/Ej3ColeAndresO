@@ -14,8 +14,8 @@ import utilidades.Algoritmos;
 public class Ventana extends javax.swing.JFrame {
 
     Banco banco;
-    CajeroAlta cajeroAlta;
-    CajeroConsulta cajeroConsulta;
+    GerenteAlta gerenteAlta;
+    GerenteConsulta gerenteConsulta;
 
     /**
      * Creates new form Window
@@ -192,8 +192,8 @@ public class Ventana extends javax.swing.JFrame {
     private void mnuConsultaTitularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaTitularesActionPerformed
         eliminarPaneles();
 
-        cajeroConsulta = new CajeroConsulta(banco);
-        add(cajeroConsulta).setVisible(true);
+        gerenteConsulta = new GerenteConsulta(banco);
+        add(gerenteConsulta).setVisible(true);
         pack();
     }//GEN-LAST:event_mnuConsultaTitularesActionPerformed
 
@@ -281,8 +281,8 @@ public class Ventana extends javax.swing.JFrame {
     private void mnuAltaTitularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAltaTitularesActionPerformed
         eliminarPaneles();
 
-        cajeroAlta = new CajeroAlta(banco);
-        add(cajeroAlta).setVisible(true);
+        gerenteAlta = new GerenteAlta(banco);
+        add(gerenteAlta).setVisible(true);
         pack();
     }//GEN-LAST:event_mnuAltaTitularesActionPerformed
 
@@ -362,8 +362,8 @@ public class Ventana extends javax.swing.JFrame {
 
     private void eliminarPaneles() {
         try {
-            remove(cajeroAlta);
-            remove(cajeroConsulta);
+            remove(gerenteAlta);
+            remove(gerenteConsulta);
 
         } catch (java.lang.NullPointerException ex) {
         }

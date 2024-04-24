@@ -11,14 +11,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author dam
  */
-public class CajeroConsulta extends javax.swing.JPanel {
+public class GerenteConsulta extends javax.swing.JPanel {
     Banco banco;
     DefaultTableModel tablaTitulares;
     
     /**
      * Creates new form CajeroConsulta
+     * @param banco
      */
-    public CajeroConsulta(Banco banco) {
+    public GerenteConsulta(Banco banco) {
         this.banco = banco;
         inicializarModeloTabla();
         initComponents();
