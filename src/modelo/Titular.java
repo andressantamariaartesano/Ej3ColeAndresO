@@ -38,5 +38,9 @@ public class Titular {
     public Prestamo getPrestamo() {
         return prestamo;
     }
+
+    public String getEmail() {
+        return email;
+    }
     
 }

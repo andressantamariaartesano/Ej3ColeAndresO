@@ -147,6 +147,7 @@ public class CajeroAlta extends javax.swing.JPanel {
 
         if (comprobarContenido(dni, nombre, direccion, email)) {
             banco.guardarTitular(dni, nombre, direccion, email);
+            JOptionPane.showMessageDialog(this, "Información", "Titular agregado", HEIGHT);
         }
     }
 

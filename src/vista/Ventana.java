@@ -1,7 +1,6 @@
 package vista;
 
 import controlador.Banco;
-import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Tipo;
@@ -13,10 +12,11 @@ import utilidades.Algoritmos;
  * @author dam
  */
 public class Ventana extends javax.swing.JFrame {
+
     Banco banco;
-    PanelCajero panelCajero;
-    PanelGerente panelGerente;
     CajeroAlta cajeroAlta;
+    CajeroConsulta cajeroConsulta;
+
     /**
      * Creates new form Window
      */
@@ -190,7 +190,11 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnuConsultaTitularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConsultaTitularesActionPerformed
-        // TODO add your handling code here:
+        eliminarPaneles();
+
+        cajeroConsulta = new CajeroConsulta(banco);
+        add(cajeroConsulta).setVisible(true);
+        pack();
     }//GEN-LAST:event_mnuConsultaTitularesActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -198,61 +202,60 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
-     * Comprueba si el login es correcto o no. En el caso de que el
-     * login y/o la contraseña estén vacios lanza una ventana de error En el
-     * caso de que no sea correcto lanza una ventana de error. En el caso de que
-     * sea correcto inicia sesión.
+     * Comprueba si el login es correcto o no. En el caso de que el login y/o la
+     * contraseña estén vacios lanza una ventana de error En el caso de que no
+     * sea correcto lanza una ventana de error. En el caso de que sea correcto
+     * inicia sesión.
      */
     private void validarLogin() {
         String usuario = this.txtUsuario.getText();
         String contrasenna = Algoritmos.getMD5(new String(this.pswContrasenna.getPassword()));
-        
+
         if (loginVacio()) {
             ventanaAdvertencia("Usario y/o contraseña vacío(s).", "Error de acceso");
-        } else if (banco.loginCorrecto(usuario, contrasenna)){
+        } else if (banco.loginCorrecto(usuario, contrasenna)) {
             int posicionUsuario = banco.getUsuarios().indexOf(new Usuario(usuario));
-            
+
             iniciarSesion(banco.getUsuarios().get(posicionUsuario).getTipo());
         } else {
             ventanaAdvertencia("Usario y/o contraseña incorrecto(s).", "Error de acceso");
         }
     }
-    
+
     /**
      * Comprueba si el login esta vacio
-     * @return Ralse si tiene contenido el login y contraseña, true si esta vacio el login y contraseña
+     *
+     * @return Ralse si tiene contenido el login y contraseña, true si esta
+     * vacio el login y contraseña
      */
     private boolean loginVacio() {
         boolean vacio = false;
-        
+
         if (this.txtUsuario.getText().isEmpty() || new String(this.pswContrasenna.getPassword()).isEmpty()) {
             vacio = true;
         }
-        
+
         return vacio;
     }
 
     /**
      * Inicia sesión según el tipo de usuario que se ha logueado
+     *
      * @param tipo Tipo de usuario que se ha logueado
      */
     private void iniciarSesion(Tipo tipo) {
-        panelLogin.setVisible(false);
-        panelLogin = null;
+        remove(panelLogin);
         this.jMenuBar1.setVisible(true);
-        switch (tipo.getDenominacion()){
+        switch (tipo.getDenominacion()) {
             case "Gerente" -> {
-                //panelGerente = new PanelGerente(banco);
                 mostrarMenuGerente();
             }
             case "Cajero" -> {
-                panelCajero = new PanelCajero(banco);
                 mostrarMenuCajero();
             }
         }
     }
-    
-    
+
     /**
      * Muestra los elementos del menú pertenecientes al gerente
      */
@@ -260,7 +263,7 @@ public class Ventana extends javax.swing.JFrame {
         mnuTransacciones.setVisible(false);
         mnuPrestamos.setVisible(false);
     }
-    
+
     /**
      * Muestra los elementos del menú pertenecientes al cajero
      */
@@ -269,18 +272,17 @@ public class Ventana extends javax.swing.JFrame {
         mnuAperturaCuentas.setVisible(false);
         mnuGestionPrestamos.setVisible(false);
     }
-    
+
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.txtUsuario.setText("");
         this.pswContrasenna.setText("");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void mnuAltaTitularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAltaTitularesActionPerformed
-        //this.panelGerente.setVisible(false);
-        
+        eliminarPaneles();
+
         cajeroAlta = new CajeroAlta(banco);
-        getContentPane().add(cajeroAlta);
-        cajeroAlta.setVisible(true);
+        add(cajeroAlta).setVisible(true);
         pack();
     }//GEN-LAST:event_mnuAltaTitularesActionPerformed
 
@@ -348,6 +350,7 @@ public class Ventana extends javax.swing.JFrame {
 
     /**
      * Muestra una ventana de advertencia con un determinado titulo y mensaje
+     *
      * @param mensaje Mensaje de la ventana
      * @param titulo Titulo de la ventana
      */
@@ -357,9 +360,12 @@ public class Ventana extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
     }
 
-    
+    private void eliminarPaneles() {
+        try {
+            remove(cajeroAlta);
+            remove(cajeroConsulta);
 
-    
-
-
+        } catch (java.lang.NullPointerException ex) {
+        }
+    }
 }

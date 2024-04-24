@@ -40,17 +40,7 @@ public class CajeroConsulta extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(850, 480));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable1.setModel(tablaTitulares);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -67,7 +57,7 @@ public class CajeroConsulta extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -81,5 +71,24 @@ public class CajeroConsulta extends javax.swing.JPanel {
         String[][] datos = {};
         String[] columnas = {"DNI", "Nombre", "Direccion", "e-mail"}; 
         tablaTitulares = new DefaultTableModel(datos, columnas);
+        annadirFilas();
+        
+    }
+
+    private void annadirFilas() {
+        String[] fila;
+        String dni, nombre, direccion, email;
+        
+        for (int i = 0; i < banco.getTitulares().size(); i++) {
+            dni = banco.getTitulares().get(i).getDni();
+            nombre = banco.getTitulares().get(i).getNombre();
+            direccion = banco.getTitulares().get(i).getDireccion();
+            email = banco.getTitulares().get(i).getEmail();
+            
+            fila = new String[]{dni, nombre, direccion, email};
+            
+            tablaTitulares.addRow(fila);
+        }
+        
     }
 }
