@@ -7,15 +7,14 @@ package vista;
 import controlador.Banco;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import modelo.Titular;
 
 /**
  *
  * @author Andres
  */
 public class CajeroAlta extends javax.swing.JPanel {
-
     Banco banco;
-
     /**
      * Creates new form CajeroAlta
      */
@@ -119,7 +118,7 @@ public class CajeroAlta extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        altaTitular();
+    altaTitular();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -136,32 +135,21 @@ public class CajeroAlta extends javax.swing.JPanel {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * Gurarda los datos en el caso de que sean correctos
-     */
     private void altaTitular() {
         String dni = txtDNI.getText().trim();
         String nombre = txtNombre.getText().trim();
         String direccion = txtDireccion.getText().trim();
         String email = txtEmail.getText().trim();
-
-        if (comprobarContenido(dni, nombre, direccion, email)) {
+        
+        if (contenidoComprobado(dni, nombre, direccion, email)) {
             banco.guardarTitular(dni, nombre, direccion, email);
+        } else {
         }
     }
 
-    /**
-     * Comprueba que los datos sean correctos
-     *
-     * @param dni DNI
-     * @param nombre Nombre
-     * @param direccion Direccion
-     * @param email Email
-     * @return False si los datos no son correctos, True si son correctos
-     */
-    private boolean comprobarContenido(String dni, String nombre, String direccion, String email) {
+    private boolean contenidoComprobado(String dni, String nombre, String direccion, String email) {
         boolean valido;
-
+        
         if (camposVacios(dni, nombre, direccion, email)) {
             valido = false;
         } else if (contenidoValido(dni, email)) {
@@ -169,26 +157,17 @@ public class CajeroAlta extends javax.swing.JPanel {
         } else {
             valido = false;
         }
-
+        
         return valido;
     }
 
-    /**
-     * Comprueba si los campos tienen texto en ellos
-     *
-     * @param dni DNI
-     * @param nombre Nombre
-     * @param direccion Direccion
-     * @param email Email
-     * @return True si tienen texto en ellos
-     */
     private boolean camposVacios(String dni, String nombre, String direccion, String email) {
         boolean vacio;
-
+        
         if (dni.isEmpty()) {
             ventanaAdvertencia("Completa el campo DNI", "Error");
             vacio = true;
-        } else if (nombre.isEmpty()) {
+        } else if (nombre.isEmpty()){
             ventanaAdvertencia("Completa el campo Nombre", "Error");
             vacio = true;
         } else if (direccion.isEmpty()) {
@@ -199,33 +178,26 @@ public class CajeroAlta extends javax.swing.JPanel {
             vacio = true;
         } else {
             vacio = false;
-        }
-
+        } 
+        
         return vacio;
     }
 
-    /**
-     * Valida que los datos cumplan una estructura correcta.
-     *
-     * @param dni DNI
-     * @param email Email
-     * @return True si los datos son validos, False si los datos no son validos.
-     */
     private boolean contenidoValido(String dni, String email) {
         boolean valido;
-
+        
         if (banco.dniValido(dni)) {
-
+            
             valido = true;
         } else {
             ventanaAdvertencia("DNI no válido.", "Error");
             valido = false;
         }
-
+        
         return valido;
     }
 
-    private void ventanaAdvertencia(String mensaje, String titulo) {
+   public void ventanaAdvertencia(String mensaje, String titulo) {
         String rutaImagen = "src/images/advertencia.png";
         ImageIcon icono = new ImageIcon(rutaImagen);
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
