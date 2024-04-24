@@ -9,16 +9,18 @@ package modelo;
  * @author dam
  */
 public class Titular {
+    
     private String dni;
     private String nombre;
     private String direccion;
+    private String email;
     private Prestamo prestamo;
 
-    public Titular(String dni, String nombre, String direccion, Prestamo prestamo) {
+    public Titular(String dni, String nombre, String direccion, String email) {
         this.dni = dni;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.prestamo = prestamo;
+        this.email = email;
     }
 
     public String getDni() {
@@ -36,6 +38,5 @@ public class Titular {
     public Prestamo getPrestamo() {
         return prestamo;
     }
-    
     
 }

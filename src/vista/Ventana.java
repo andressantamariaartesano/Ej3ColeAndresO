@@ -16,6 +16,7 @@ public class Ventana extends javax.swing.JFrame {
     Banco banco;
     PanelCajero panelCajero;
     PanelGerente panelGerente;
+    CajeroAlta cajeroAlta;
     /**
      * Creates new form Window
      */
@@ -127,6 +128,11 @@ public class Ventana extends javax.swing.JFrame {
         mnuTitulares.setFocusable(false);
 
         mnuAltaTitulares.setText("Alta");
+        mnuAltaTitulares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAltaTitularesActionPerformed(evt);
+            }
+        });
         mnuTitulares.add(mnuAltaTitulares);
 
         mnuConsultaTitulares.setText("Consulta");
@@ -236,7 +242,7 @@ public class Ventana extends javax.swing.JFrame {
         this.jMenuBar1.setVisible(true);
         switch (tipo.getDenominacion()){
             case "Gerente" -> {
-                panelGerente = new PanelGerente(banco);
+                //panelGerente = new PanelGerente(banco);
                 mostrarMenuGerente();
             }
             case "Cajero" -> {
@@ -268,6 +274,15 @@ public class Ventana extends javax.swing.JFrame {
         this.txtUsuario.setText("");
         this.pswContrasenna.setText("");
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void mnuAltaTitularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAltaTitularesActionPerformed
+        //this.panelGerente.setVisible(false);
+        
+        cajeroAlta = new CajeroAlta(banco);
+        getContentPane().add(cajeroAlta);
+        cajeroAlta.setVisible(true);
+        pack();
+    }//GEN-LAST:event_mnuAltaTitularesActionPerformed
 
     /**
      * @param args the command line arguments
