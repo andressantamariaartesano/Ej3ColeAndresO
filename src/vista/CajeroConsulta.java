@@ -67,6 +67,9 @@ public class CajeroConsulta extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Inicializa el modelo de la tabla.
+     */
     private void inicializarModeloTabla() {
         String[][] datos = {};
         String[] columnas = {"DNI", "Nombre", "Direccion", "e-mail"}; 
@@ -75,6 +78,9 @@ public class CajeroConsulta extends javax.swing.JPanel {
         
     }
 
+    /**
+     * Añade los titulares al modelo de la tabla.
+     */
     private void annadirFilas() {
         String[] fila;
         String dni, nombre, direccion, email;
