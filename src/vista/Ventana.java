@@ -16,6 +16,7 @@ public class Ventana extends javax.swing.JFrame {
     Banco banco;
     GerenteAlta gerenteAlta;
     GerenteConsulta gerenteConsulta;
+    GerenteModificacion gerenteModificacion;
 
     /**
      * Creates new form Window
@@ -144,6 +145,11 @@ public class Ventana extends javax.swing.JFrame {
         mnuTitulares.add(mnuConsultaTitulares);
 
         mnuModificacionTitulares.setText("Modificacion");
+        mnuModificacionTitulares.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuModificacionTitularesActionPerformed(evt);
+            }
+        });
         mnuTitulares.add(mnuModificacionTitulares);
 
         jMenuBar1.add(mnuTitulares);
@@ -286,6 +292,14 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_mnuAltaTitularesActionPerformed
 
+    private void mnuModificacionTitularesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuModificacionTitularesActionPerformed
+        eliminarPaneles();
+        
+        gerenteModificacion = new GerenteModificacion(banco);
+        add(gerenteModificacion).setVisible(true);
+        pack();
+    }//GEN-LAST:event_mnuModificacionTitularesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -364,7 +378,7 @@ public class Ventana extends javax.swing.JFrame {
         try {
             remove(gerenteAlta);
             remove(gerenteConsulta);
-
+            remove(gerenteModificacion);
         } catch (java.lang.NullPointerException ex) {
         }
     }

@@ -23,8 +23,6 @@ public class GerenteConsulta extends javax.swing.JPanel {
         this.banco = banco;
         inicializarModeloTabla();
         initComponents();
-        
-        
     }
 
     /**
