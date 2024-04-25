@@ -5,26 +5,23 @@
 package vista;
 
 import controlador.Banco;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author Andres
+ * @author dam
  */
 public class GerenteModificacion extends javax.swing.JPanel {
-
     Banco banco;
-
     /**
-     * Creates new form CajeroAlta
+     * Creates new form GerenteModificacion
      */
     public GerenteModificacion(Banco banco) {
         initComponents();
-        ocultarComponentes();
         this.banco = banco;
+        
+        vistaComprobacion();
     }
-
+    
     private void vistaComprobacion(){
         this.jLabel2.setVisible(false);
         this.jLabel3.setVisible(false);
@@ -44,7 +41,7 @@ public class GerenteModificacion extends javax.swing.JPanel {
         this.txtEmail.setVisible(true);
         this.btnAceptar.setText("Modificar");
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,68 +51,61 @@ public class GerenteModificacion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
-        txtDNI = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        txtDNI = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
 
-        setPreferredSize(new java.awt.Dimension(850, 480));
+        jTextField3.setText("jTextField3");
 
         jLabel1.setText("DNI");
 
-        jButton1.setText("Cancelar");
+        jButton1.setText("jButton1");
 
         btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Nombre");
 
-        jLabel3.setText("Dirección");
+        jLabel3.setText("Direccion");
 
         jLabel4.setText("E-mail");
-
-        txtEmail.setToolTipText("");
-        txtEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(280, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(222, 222, 222)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
                         .addComponent(btnAceptar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtDNI, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(261, Short.MAX_VALUE))
+                            .addComponent(txtDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtNombre)
+                            .addComponent(txtDireccion)
+                            .addComponent(txtEmail))))
+                .addGap(205, 205, 205))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
+                .addGap(134, 134, 134)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -131,17 +121,13 @@ public class GerenteModificacion extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(115, 115, 115)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btnAceptar))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        modificarTitular();
-    }//GEN-LAST:event_btnAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -151,110 +137,10 @@ public class GerenteModificacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-
-    /**
-     * Gurarda los datos en el caso de que sean correctos
-     */
-    private void modificarTitular() {
-        String dni = txtDNI.getText().trim();
-        String nombre = txtNombre.getText().trim();
-        String direccion = txtDireccion.getText().trim();
-        String email = txtEmail.getText().trim();
-
-        if (comprobarContenido(dni, nombre, direccion, email)) {
-            if (!banco.titularExistente(dni)) {
-                banco.guardarTitular(dni, nombre, direccion, email);
-                JOptionPane.showMessageDialog(this, "Información", "Titular agregado", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                ventanaAdvertencia("Titular existente", "Información");
-            }
-        }
-    }
-
-    /**
-     * Comprueba que los datos sean correctos
-     *
-     * @param dni DNI
-     * @param nombre Nombre
-     * @param direccion Direccion
-     * @param email Email
-     * @return False si los datos no son correctos, True si son correctos
-     */
-    private boolean comprobarContenido(String dni, String nombre, String direccion, String email) {
-        boolean valido;
-
-        if (camposVacios(dni, nombre, direccion, email)) {
-            valido = false;
-        } else if (contenidoValido(dni, email)) {
-            valido = true;
-        } else {
-            valido = false;
-        }
-
-        return valido;
-    }
-
-    /**
-     * Comprueba si los campos tienen texto en ellos
-     *
-     * @param dni DNI
-     * @param nombre Nombre
-     * @param direccion Direccion
-     * @param email Email
-     * @return True si tienen texto en ellos
-     */
-    private boolean camposVacios(String dni, String nombre, String direccion, String email) {
-        boolean vacio;
-
-        if (dni.isEmpty()) {
-            ventanaAdvertencia("Completa el campo DNI", "Error");
-            vacio = true;
-        } else if (nombre.isEmpty()) {
-            ventanaAdvertencia("Completa el campo Nombre", "Error");
-            vacio = true;
-        } else if (direccion.isEmpty()) {
-            ventanaAdvertencia("Completa el campo Direccion", "Error");
-            vacio = true;
-        } else if (email.isEmpty()) {
-            ventanaAdvertencia("Completa el campo E-mail", "Error");
-            vacio = true;
-        } else {
-            vacio = false;
-        }
-
-        return vacio;
-    }
-
-    /**
-     * Valida que los datos cumplan una estructura correcta.
-     *
-     * @param dni DNI
-     * @param email Email
-     * @return True si los datos son validos, False si los datos no son validos.
-     */
-    private boolean contenidoValido(String dni, String email) {
-        boolean valido;
-
-        if (banco.dniValido(dni)) {
-
-            valido = true;
-        } else {
-            ventanaAdvertencia("DNI no válido.", "Error");
-            valido = false;
-        }
-
-        return valido;
-    }
-
-    private void ventanaAdvertencia(String mensaje, String titulo) {
-        String rutaImagen = "src/images/advertencia.png";
-        ImageIcon icono = new ImageIcon(rutaImagen);
-        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
-    }
-
 }
