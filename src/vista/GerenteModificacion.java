@@ -5,6 +5,9 @@
 package vista;
 
 import controlador.Banco;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import modelo.Titular;
 
 /**
  *
@@ -12,6 +15,7 @@ import controlador.Banco;
  */
 public class GerenteModificacion extends javax.swing.JPanel {
     Banco banco;
+    private Boolean vista;
     /**
      * Creates new form GerenteModificacion
      */
@@ -70,6 +74,11 @@ public class GerenteModificacion extends javax.swing.JPanel {
         jButton1.setText("jButton1");
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Nombre");
 
@@ -129,6 +138,14 @@ public class GerenteModificacion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        if (btnAceptar.getText().equals("Aceptar")) {
+            comprobarTitular();
+        } else {
+            modificarTitular();
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -143,4 +160,30 @@ public class GerenteModificacion extends javax.swing.JPanel {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void comprobarTitular() {
+        String dni = txtDNI.getText();
+        
+        if (banco.titularExiste(dni)) {
+            vistaModificacion();
+        } else {
+            ventanaAdvertencia("Titular no existe", "Error");
+        }
+    }
+
+    private void modificarTitular() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    /**
+     * Muestra una ventana de advertencia con un determinado titulo y mensaje
+     *
+     * @param mensaje Mensaje de la ventana
+     * @param titulo Titulo de la ventana
+     */
+    public void ventanaAdvertencia(String mensaje, String titulo) {
+        String rutaImagen = "src/images/advertencia.png";
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
 }

@@ -146,7 +146,7 @@ public class GerenteAlta extends javax.swing.JPanel {
         String email = txtEmail.getText().trim();
 
         if (comprobarContenido(dni, nombre, direccion, email)) {
-            if (!banco.titularExistente(dni)) {
+            if (!banco.titularExiste(dni)) {
                 banco.guardarTitular(dni, nombre, direccion, email);
                 JOptionPane.showMessageDialog(this, "Información", "Titular agregado", JOptionPane.INFORMATION_MESSAGE);
             } else {

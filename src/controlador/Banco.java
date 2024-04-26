@@ -153,7 +153,7 @@ public class Banco {
         return correcto;
     }
 
-    public boolean titularExistente(String dni) {
+    public boolean titularExiste(String dni) {
         boolean existe;
 
         existe = titulares.contains(new Titular(dni));
