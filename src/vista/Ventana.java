@@ -379,6 +379,7 @@ public class Ventana extends javax.swing.JFrame {
             remove(gerenteAlta);
             remove(gerenteConsulta);
             remove(gerenteModificacion);
+            pack();
         } catch (java.lang.NullPointerException ex) {
         }
     }

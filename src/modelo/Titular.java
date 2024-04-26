@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Titular {
     
-    private String dni;
+    private final String dni;
     private String nombre;
     private String direccion;
     private String email;
@@ -51,6 +51,20 @@ public class Titular {
         return email;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;

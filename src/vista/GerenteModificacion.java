@@ -14,36 +14,48 @@ import modelo.Titular;
  * @author dam
  */
 public class GerenteModificacion extends javax.swing.JPanel {
+
     Banco banco;
-    private Boolean vista;
+
     /**
      * Creates new form GerenteModificacion
      */
     public GerenteModificacion(Banco banco) {
         initComponents();
         this.banco = banco;
-        
+
         vistaComprobacion();
     }
-    
-    private void vistaComprobacion(){
+
+    private void vistaComprobacion() {
         this.jLabel2.setVisible(false);
         this.jLabel3.setVisible(false);
         this.jLabel4.setVisible(false);
         this.txtNombre.setVisible(false);
         this.txtDireccion.setVisible(false);
         this.txtEmail.setVisible(false);
+        this.txtDNI.setEnabled(true);
         this.btnAceptar.setText("Aceptar");
     }
-    
-    private void vistaModificacion(){
+
+    private void vistaModificacion() {
         this.jLabel2.setVisible(true);
         this.jLabel3.setVisible(true);
         this.jLabel4.setVisible(true);
         this.txtNombre.setVisible(true);
         this.txtDireccion.setVisible(true);
         this.txtEmail.setVisible(true);
+        this.txtDNI.setEnabled(false);
         this.btnAceptar.setText("Modificar");
+        String dni = txtDNI.getText();
+        Titular titular = banco.getTitular(dni);
+        cargarDatos(titular);
+    }
+
+    private void cargarDatos(Titular titular) {
+        txtDireccion.setText(titular.getDireccion());
+        txtEmail.setText(titular.getEmail());
+        txtNombre.setText(titular.getNombre());
     }
 
     /**
@@ -57,7 +69,7 @@ public class GerenteModificacion extends javax.swing.JPanel {
 
         jTextField3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -71,7 +83,12 @@ public class GerenteModificacion extends javax.swing.JPanel {
 
         jLabel1.setText("DNI");
 
-        jButton1.setText("jButton1");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,11 +108,11 @@ public class GerenteModificacion extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(222, 222, 222)
+                .addContainerGap(222, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
+                        .addComponent(btnCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
                         .addComponent(btnAceptar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,12 +126,12 @@ public class GerenteModificacion extends javax.swing.JPanel {
                             .addComponent(txtNombre)
                             .addComponent(txtDireccion)
                             .addComponent(txtEmail))))
-                .addGap(205, 205, 205))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(134, 134, 134)
+                .addContainerGap(111, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -130,11 +147,11 @@ public class GerenteModificacion extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnCancelar)
                     .addComponent(btnAceptar))
-                .addGap(53, 53, 53))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -146,10 +163,18 @@ public class GerenteModificacion extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        if (btnAceptar.getText().equals("Aceptar")) {
+            limpiarTexto();
+        } else {
+            reiniciarTexto();
+        }
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -163,18 +188,35 @@ public class GerenteModificacion extends javax.swing.JPanel {
 
     private void comprobarTitular() {
         String dni = txtDNI.getText();
-        
-        if (banco.titularExiste(dni)) {
-            vistaModificacion();
+
+        if (banco.dniValido(dni)) {
+            if (banco.titularExiste(dni)) {
+                vistaModificacion();
+            } else {
+                ventanaAdvertencia("Titular no existe", "Error");
+            }
         } else {
-            ventanaAdvertencia("Titular no existe", "Error");
+            ventanaAdvertencia("DNI incorrecto", "Error");
         }
+
     }
 
     private void modificarTitular() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String dni = txtDNI.getText();
+        Titular titularActual = banco.getTitular(dni);
+        
+        String nombre = txtNombre.getText();
+        String direccion = txtDireccion.getText();
+        String email = txtEmail.getText();
+        
+        titularActual.setNombre(nombre);
+        titularActual.setDireccion(direccion);
+        titularActual.setEmail(email);
+        
+        ventanaInformacion("Modificado correctamente", "Informacion");
+        vistaComprobacion();
     }
-    
+
     /**
      * Muestra una ventana de advertencia con un determinado titulo y mensaje
      *
@@ -185,5 +227,30 @@ public class GerenteModificacion extends javax.swing.JPanel {
         String rutaImagen = "src/images/advertencia.png";
         ImageIcon icono = new ImageIcon(rutaImagen);
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
+
+    /**
+     * Muestra una ventana de informacion con un determinado titulo y mensaje
+     *
+     * @param mensaje Mensaje de la ventana
+     * @param titulo Titulo de la ventana
+     */
+    public void ventanaInformacion(String mensaje, String titulo) {
+        String rutaImagen = "src/images/informacion.png";
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
+
+    private void reiniciarTexto() {
+        String dni = txtDNI.getText();
+        Titular titularActual = banco.getTitular(dni);
+        
+        txtNombre.setText(titularActual.getNombre());
+        txtDireccion.setText(titularActual.getDireccion());
+        txtEmail.setText(titularActual.getEmail());
+    }
+
+    private void limpiarTexto() {
+        txtDNI.setText("");
     }
 }

@@ -10,12 +10,12 @@ package modelo;
  */
 public class Cuenta {
     private String numero;
-    private String dni;
+    private Titular titular;
     private double saldo;
 
-    public Cuenta(String numero, String dni, double saldo) {
+    public Cuenta(String numero, Titular titular, double saldo) {
         this.numero = numero;
-        this.dni = dni;
+        this.titular = titular;
         this.saldo = saldo;
     }
 
@@ -23,8 +23,8 @@ public class Cuenta {
         return numero;
     }
 
-    public String getDni() {
-        return dni;
+    public Titular getDni() {
+        return titular;
     }
 
     public double getSaldo() {

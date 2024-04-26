@@ -49,6 +49,12 @@ public class Banco {
     public ArrayList<Titular> getTitulares() {
         return titulares;
     }
+    
+    public Titular getTitular(String dni){
+        int posicionTitular = titulares.indexOf(new Titular(dni));
+        
+        return titulares.get(posicionTitular);
+    }
 
     public ArrayList<Cuenta> getCuentas() {
         return cuentas;
