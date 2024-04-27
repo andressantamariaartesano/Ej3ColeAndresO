@@ -17,6 +17,7 @@ public class Ventana extends javax.swing.JFrame {
     GerenteAlta gerenteAlta;
     GerenteConsulta gerenteConsulta;
     GerenteModificacion gerenteModificacion;
+    GerenteAperturaCuentas gerenteAperturaCuentas;
 
     /**
      * Creates new form Window
@@ -155,6 +156,11 @@ public class Ventana extends javax.swing.JFrame {
         jMenuBar1.add(mnuTitulares);
 
         mnuAperturaCuentas.setText("Apertura de Cuentas");
+        mnuAperturaCuentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuAperturaCuentasMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnuAperturaCuentas);
 
         mnuGestionPrestamos.setText("Gestion de préstamos");
@@ -300,6 +306,14 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_mnuModificacionTitularesActionPerformed
 
+    private void mnuAperturaCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuAperturaCuentasMouseClicked
+        eliminarPaneles();
+
+        gerenteAperturaCuentas = new GerenteAperturaCuentas(banco);
+        add(gerenteAperturaCuentas).setVisible(true);
+        pack();
+    }//GEN-LAST:event_mnuAperturaCuentasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -377,8 +391,21 @@ public class Ventana extends javax.swing.JFrame {
     private void eliminarPaneles() {
         try {
             remove(gerenteAlta);
+            pack();
+        } catch (java.lang.NullPointerException ex) {
+        }
+        try {
             remove(gerenteConsulta);
+            pack();
+        } catch (java.lang.NullPointerException ex) {
+        }
+        try {
             remove(gerenteModificacion);
+            pack();
+        } catch (java.lang.NullPointerException ex) {
+        }
+        try {
+            remove(gerenteAperturaCuentas);
             pack();
         } catch (java.lang.NullPointerException ex) {
         }

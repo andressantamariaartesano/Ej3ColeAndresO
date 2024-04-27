@@ -145,7 +145,7 @@ public class GerenteAlta extends javax.swing.JPanel {
         String direccion = txtDireccion.getText().trim();
         String email = txtEmail.getText().trim();
 
-        if (comprobarContenido(dni, nombre, direccion, email)) {
+        if (contenidoComprobado(dni, nombre, direccion, email)) {
             if (!banco.titularExiste(dni)) {
                 banco.guardarTitular(dni, nombre, direccion, email);
                 JOptionPane.showMessageDialog(this, "Información", "Titular agregado", JOptionPane.INFORMATION_MESSAGE);
@@ -164,12 +164,12 @@ public class GerenteAlta extends javax.swing.JPanel {
      * @param email Email
      * @return False si los datos no son correctos, True si son correctos
      */
-    private boolean comprobarContenido(String dni, String nombre, String direccion, String email) {
+    private boolean contenidoComprobado(String dni, String nombre, String direccion, String email) {
         boolean valido;
 
         if (camposVacios(dni, nombre, direccion, email)) {
             valido = false;
-        } else if (contenidoValido(dni, email)) {
+        } else if (contenidoValido(dni)) {
             valido = true;
         } else {
             valido = false;
@@ -213,10 +213,9 @@ public class GerenteAlta extends javax.swing.JPanel {
      * Valida que los datos cumplan una estructura correcta.
      *
      * @param dni DNI
-     * @param email Email
      * @return True si los datos son validos, False si los datos no son validos.
      */
-    private boolean contenidoValido(String dni, String email) {
+    private boolean contenidoValido(String dni) {
         boolean valido;
 
         if (banco.dniValido(dni)) {

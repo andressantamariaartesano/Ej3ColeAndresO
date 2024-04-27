@@ -30,6 +30,8 @@ public class Banco {
 
         inicializarTipos();
         inicializarUsuarios();
+        titulares.add(new Titular("71313042R", "Andres", "asdf", "asdf"));
+        cuentas.add(new Cuenta("123", titulares.get(0), 123.0));
     }
 
     private void inicializarTipos() {
@@ -163,6 +165,20 @@ public class Banco {
         boolean existe;
 
         existe = titulares.contains(new Titular(dni));
+
+        return existe;
+    }
+
+    public void guardarCuenta(String numeroCuenta, String dni, double saldo) {
+        Titular titular = titulares.get(titulares.indexOf(new Titular(dni)));
+        
+        cuentas.add(new Cuenta(numeroCuenta, titular, saldo));
+    }
+
+    public boolean cuentaExistente(String numeroCuenta) {
+        boolean existe;
+
+        existe = cuentas.contains(new Cuenta(numeroCuenta));
 
         return existe;
     }

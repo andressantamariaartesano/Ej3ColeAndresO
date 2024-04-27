@@ -49,6 +49,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Apertura de Cuentas"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuAperturaCuentasMouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnuGestionPrestamos">
           <Properties>
