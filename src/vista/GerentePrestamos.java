@@ -5,12 +5,14 @@
 package vista;
 
 import controlador.Banco;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Andres
  */
 public class GerentePrestamos extends javax.swing.JPanel {
+    DefaultComboBoxModel modeloComboTitulares;
     Banco banco;
     /**
      * Creates new form GerentePrestamos
@@ -38,7 +40,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtPlazo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(850, 480));
@@ -56,7 +58,12 @@ public class GerentePrestamos extends javax.swing.JPanel {
 
         jLabel5.setText("Hasta:");
 
-        jButton1.setText("Aceptar");
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +95,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
                         .addComponent(cmbTitular, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtMonto)
                         .addComponent(txtInteres))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(270, 270, 270))
         );
         layout.setVerticalGroup(
@@ -113,7 +120,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
                     .addComponent(jLabel5))
                 .addGap(87, 87, 87)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
@@ -126,11 +133,15 @@ public class GerentePrestamos extends javax.swing.JPanel {
         txtPlazo.setText("");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbTitular;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -140,4 +151,5 @@ public class GerentePrestamos extends javax.swing.JPanel {
     private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtPlazo;
     // End of variables declaration//GEN-END:variables
+
 }
