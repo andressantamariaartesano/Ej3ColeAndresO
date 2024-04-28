@@ -28,6 +28,12 @@ public class Ventana extends javax.swing.JFrame {
         banco = new Banco();
         jMenuBar1.setVisible(false);
     }
+    
+    public Ventana(Banco banco) {
+        initComponents();
+        this.banco = banco;
+        jMenuBar1.setVisible(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -196,6 +202,11 @@ public class Ventana extends javax.swing.JFrame {
         jMenuBar1.add(mnuPrestamos);
 
         mnuCerrarSesion.setText("Cerrar sesión");
+        mnuCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuCerrarSesionMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnuCerrarSesion);
 
         mnuSalir.setText("Salir");
@@ -327,6 +338,11 @@ public class Ventana extends javax.swing.JFrame {
         add(gerentePrestamos).setVisible(true);
         pack();
     }//GEN-LAST:event_mnuGestionPrestamosMouseClicked
+
+    private void mnuCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuCerrarSesionMouseClicked
+        dispose();
+        new Ventana(banco).setVisible(true);
+    }//GEN-LAST:event_mnuCerrarSesionMouseClicked
 
     /**
      * @param args the command line arguments
