@@ -9,19 +9,37 @@ import javax.swing.DefaultComboBoxModel;
 
 /**
  *
- * @author Andres
+ * @author Andrés
  */
 public class GerentePrestamos extends javax.swing.JPanel {
     DefaultComboBoxModel modeloComboTitulares;
     Banco banco;
     /**
      * Creates new form GerentePrestamos
+     * @param banco
      */
     public GerentePrestamos(Banco banco) {
         this.banco = banco;
+        inicializarComboTitulares();
         initComponents();
     }
 
+    private void inicializarComboTitulares() {
+        String[] listaTitulares = cargarTitulares();
+        modeloComboTitulares = new DefaultComboBoxModel(listaTitulares);
+    }
+
+    private String[] cargarTitulares() {
+        int numeroTitulares = banco.getTitulares().size();
+        String[] lista = new String[numeroTitulares];
+        
+        for (int i = 0; i < numeroTitulares; i++) {
+            lista[i] = banco.getTitulares().get(i).toString();
+        }
+        
+        return lista;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +63,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(850, 480));
 
-        cmbTitular.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTitular.setModel(modeloComboTitulares);
         cmbTitular.setSelectedIndex(-1);
 
         jLabel1.setText("Titular");
@@ -152,4 +170,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
     private javax.swing.JTextField txtPlazo;
     // End of variables declaration//GEN-END:variables
 
+    
+
+   
 }

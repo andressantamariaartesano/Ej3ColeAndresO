@@ -86,6 +86,12 @@ public class Titular {
         final Titular other = (Titular) obj;
         return Objects.equals(this.dni, other.dni);
     }
+
+    @Override
+    public String toString() {
+        return dni + " - " + nombre;
+    }
+    
     
     
     
