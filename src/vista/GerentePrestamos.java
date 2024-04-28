@@ -5,17 +5,27 @@
 package vista;
 
 import controlador.Banco;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import modelo.Titular;
 
 /**
  *
  * @author Andrés
  */
 public class GerentePrestamos extends javax.swing.JPanel {
+
     DefaultComboBoxModel modeloComboTitulares;
     Banco banco;
+
     /**
      * Creates new form GerentePrestamos
+     *
      * @param banco
      */
     public GerentePrestamos(Banco banco) {
@@ -25,21 +35,10 @@ public class GerentePrestamos extends javax.swing.JPanel {
     }
 
     private void inicializarComboTitulares() {
-        String[] listaTitulares = cargarTitulares();
+        Vector listaTitulares = new Vector(banco.getTitulares());
         modeloComboTitulares = new DefaultComboBoxModel(listaTitulares);
     }
 
-    private String[] cargarTitulares() {
-        int numeroTitulares = banco.getTitulares().size();
-        String[] lista = new String[numeroTitulares];
-        
-        for (int i = 0; i < numeroTitulares; i++) {
-            lista[i] = banco.getTitulares().get(i).toString();
-        }
-        
-        return lista;
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,7 +151,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
+        tramitarPrestamo();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 
@@ -170,7 +169,158 @@ public class GerentePrestamos extends javax.swing.JPanel {
     private javax.swing.JTextField txtPlazo;
     // End of variables declaration//GEN-END:variables
 
+    private void tramitarPrestamo() {
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("d/M/y");
+        Titular titular = (Titular) cmbTitular.getSelectedItem(); // convierto el item seleccionado de un Object a un Titular, lo "casteo"
+        String monto = txtMonto.getText().trim();
+        String interes = txtInteres.getText().trim();
+        String plazo = txtPlazo.getText().trim();
+
+        if (camposValidos(titular, monto, interes, plazo)) {
+            titular.guardarPrestamo(Double.parseDouble(monto), Double.parseDouble(interes), LocalDate.parse(plazo, formatoFecha));
+            ventanaAdvertencia("Prestamo tramitado", "Informacion");
+        }
+
+    }
+
+    private boolean camposValidos(Titular titular, String monto, String interes, String plazo) {
+        boolean valido;
+
+        if (!titularValido(titular)) {
+            valido = false;
+        } else if (!montoValido(monto)) {
+            valido = false;
+        } else if (!interesValido(interes)) {
+            valido = false;
+        } else if (!plazoValido(plazo)){
+            valido = false;
+        } else {
+            valido = true;
+        } 
+        
+        return valido;
+    }
+
+    private boolean titularValido(Titular titular) {
+        boolean valido;
+
+        if (titular == null) {
+            ventanaAdvertencia("Selecciona un titular", "Error");
+            valido = false;
+        } else if (titular.getPrestamo() != null) {
+            ventanaAdvertencia(titular.toString() + " ya tiene un préstamo a su nombre.", "Error");
+            valido = false;
+        } else {
+            valido = true;
+        }
+
+        return valido;
+    }
+
+    private void ventanaAdvertencia(String mensaje, String titulo) {
+        String rutaImagen = "src/images/advertencia.png";
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
+
+    private boolean montoValido(String monto) {
+        boolean valido;
+
+        if (monto.equals("")) {
+            ventanaAdvertencia("Introduce un monto", "Error");
+            valido = false;
+        } else if (!esNumerico(monto)) {
+            ventanaAdvertencia("El monto no es un número", "Error");
+            valido = false;
+        } else if (Double.parseDouble(monto) < 0) {
+            ventanaAdvertencia("El monto tiene que ser positivo", "Error");
+            valido = false;
+        } 
+        else {
+            valido = true;
+        }
+
+        return valido;
+    }
+
+    private boolean interesValido(String interes) {
+        boolean valido;
+
+        if (interes.equals("")) {
+            ventanaAdvertencia("Introduce un interes", "Error");
+            valido = false;
+        } else if (!esNumerico(interes)) {
+            ventanaAdvertencia("El interes no es un número", "Error");
+            valido = false;
+        } else if (Double.parseDouble(interes) <= 0 && Double.parseDouble(interes) >= 1){
+            ventanaAdvertencia("El interes tiene que ser positivo", "Error");
+            valido = false;
+        } else {
+            valido = true;
+        }
+
+        return valido;
+    }
     
+    private boolean esNumerico(String valor) {
+        boolean valido;
+
+        try {
+            Double.valueOf(valor);
+            valido = true;
+        } catch (NumberFormatException ex) {
+            valido = false;
+        }
+        
+        return valido;
+    }
+
+    private boolean plazoValido(String plazo) {
+        boolean valido;
+        if (plazo.isEmpty()){
+            ventanaAdvertencia("Introduce un plazo", "Error");
+            valido = false;
+        } else if (!fechaValida(plazo)){
+            ventanaAdvertencia("Introduce una fecha con el formato dd/mm/aaaa", "Error");
+            valido = false;
+        } else if (!fechaMayorActual(plazo)){
+            ventanaAdvertencia("La fecha no puede ser menor a hoy", "Error");
+            valido = false;
+        } else {
+            valido = true;
+        }
+        return valido;
+    }
+
+    private boolean fechaValida(String plazo) {
+        boolean valido;
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("d/M/y");
+        
+        try {
+            LocalDate.parse(plazo, formatoFecha);
+            valido = true;
+        } catch (DateTimeParseException ex){
+            valido = false;
+        }
+        
+        return valido;
+    }
+
+    private boolean fechaMayorActual(String plazo) {
+        boolean valido;
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("d/M/y");
+        LocalDate hoy = LocalDate.now();
+        LocalDate fechaPlazo = LocalDate.parse(plazo, formatoFecha);
+        
+        if (hoy.compareTo(fechaPlazo) < 0) {
+            valido = true;
+        } else {
+            valido = false;
+        }
+        
+        return valido;
+    }
 
    
+
 }

@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -90,6 +91,10 @@ public class Titular {
     @Override
     public String toString() {
         return dni + " - " + nombre;
+    }
+
+    public void guardarPrestamo(double monto, double interes, LocalDate fecha) {
+        prestamo = new Prestamo(monto, interes, fecha);
     }
     
     

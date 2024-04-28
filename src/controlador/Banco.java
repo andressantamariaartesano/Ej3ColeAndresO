@@ -30,7 +30,7 @@ public class Banco {
 
         inicializarTipos();
         inicializarUsuarios();
-        titulares.add(new Titular("71313042R", "Andres", "asdf", "asdf"));
+        titulares.add(new Titular("98003826K", "Andres", "asdf", "asdf"));
         cuentas.add(new Cuenta("123", titulares.get(0), 123.0));
     }
 
