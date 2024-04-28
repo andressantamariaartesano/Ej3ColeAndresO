@@ -210,6 +210,11 @@ public class Ventana extends javax.swing.JFrame {
         jMenuBar1.add(mnuCerrarSesion);
 
         mnuSalir.setText("Salir");
+        mnuSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuSalirMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnuSalir);
 
         setJMenuBar(jMenuBar1);
@@ -343,6 +348,10 @@ public class Ventana extends javax.swing.JFrame {
         dispose();
         new Ventana(banco).setVisible(true);
     }//GEN-LAST:event_mnuCerrarSesionMouseClicked
+
+    private void mnuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuSalirMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_mnuSalirMouseClicked
 
     /**
      * @param args the command line arguments
