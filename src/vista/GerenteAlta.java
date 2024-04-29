@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Andres
+ * @author Andrés
  */
 public class GerenteAlta extends javax.swing.JPanel {
 

@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class GerenteConsulta extends javax.swing.JPanel {
     Banco banco;

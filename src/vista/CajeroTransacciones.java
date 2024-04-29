@@ -13,7 +13,7 @@ import modelo.Cuenta;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class CajeroTransacciones extends javax.swing.JPanel {
     DefaultComboBoxModel modeloComboCuentas;

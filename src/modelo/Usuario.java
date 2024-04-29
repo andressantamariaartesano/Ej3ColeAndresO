@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class Usuario {
     private String login;

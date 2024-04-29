@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class Prestamo {
     private double monto;

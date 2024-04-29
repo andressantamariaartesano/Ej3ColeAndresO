@@ -13,7 +13,7 @@ import utilidades.Algoritmos;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class Banco {
 

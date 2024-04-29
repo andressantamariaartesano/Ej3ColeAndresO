@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class Cuenta {
     private final String numero;

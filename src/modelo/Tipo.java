@@ -6,7 +6,7 @@ package modelo;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class Tipo {
     private int codigo;

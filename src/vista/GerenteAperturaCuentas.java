@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class GerenteAperturaCuentas extends javax.swing.JPanel {
 

@@ -11,7 +11,7 @@ import modelo.Titular;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class GerenteModificacion extends javax.swing.JPanel {
 
