@@ -134,7 +134,7 @@ public class GerenteAlta extends javax.swing.JPanel {
         if (contenidoComprobado(dni, nombre, direccion, email)) {
             if (!banco.titularExiste(dni)) {
                 banco.guardarTitular(dni, nombre, direccion, email);
-                JOptionPane.showMessageDialog(this, "Información", "Titular agregado", JOptionPane.INFORMATION_MESSAGE);
+                ventanaInformacion("Titular agregado", "Informacion");
             } else {
                 ventanaAdvertencia("Titular existente", "Información");
             }
@@ -236,6 +236,18 @@ public class GerenteAlta extends javax.swing.JPanel {
      */
     private void ventanaAdvertencia(String mensaje, String titulo) {
         String rutaImagen = "src/images/advertencia.png";
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
+    
+    /**
+     * Muestra una ventana de informacion con un determinado titulo y mensaje.
+     *
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
+     */
+    public void ventanaInformacion(String mensaje, String titulo) {
+        String rutaImagen = "src/images/informacion.png";
         ImageIcon icono = new ImageIcon(rutaImagen);
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
     }

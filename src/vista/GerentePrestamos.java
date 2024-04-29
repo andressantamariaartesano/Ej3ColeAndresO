@@ -166,7 +166,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
 
         if (camposValidos(titular, monto, interes, plazo)) {
             titular.guardarPrestamo(Double.parseDouble(monto), Double.parseDouble(interes), LocalDate.parse(plazo, formatoFecha));
-            ventanaAdvertencia("Prestamo tramitado", "Informacion");
+            ventanaInformacion("Prestamo tramitado", "Informacion");
             limpiarCampos();
         }
 
@@ -381,6 +381,18 @@ public class GerentePrestamos extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
     }
 
+    /**
+     * Muestra una ventana de informacion con un determinado titulo y mensaje.
+     *
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
+     */
+    public void ventanaInformacion(String mensaje, String titulo) {
+        String rutaImagen = "src/images/informacion.png";
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
+    
     /**
      * Limpia todos los campos.
      */

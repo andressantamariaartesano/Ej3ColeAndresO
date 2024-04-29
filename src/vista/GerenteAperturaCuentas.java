@@ -133,7 +133,7 @@ public class GerenteAperturaCuentas extends javax.swing.JPanel {
 
         if (contenidoComprobado(numeroCuenta, dni, saldo)) {
             banco.guardarCuenta(numeroCuenta, dni, Double.parseDouble(saldo));
-            this.ventanaAdvertencia("Cuenta agregada", "Informacion");
+            ventanaInformacion("Cuenta agregada", "Informacion");
             limpiarTexto();
         }
     }
@@ -259,6 +259,18 @@ public class GerenteAperturaCuentas extends javax.swing.JPanel {
      */
     private void ventanaAdvertencia(String mensaje, String titulo) {
         String rutaImagen = "src/images/advertencia.png";
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
+    
+    /**
+     * Muestra una ventana de informacion con un determinado titulo y mensaje.
+     *
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
+     */
+    public void ventanaInformacion(String mensaje, String titulo) {
+        String rutaImagen = "src/images/informacion.png";
         ImageIcon icono = new ImageIcon(rutaImagen);
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
     }
