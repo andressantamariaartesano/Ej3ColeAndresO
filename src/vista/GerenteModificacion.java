@@ -23,10 +23,12 @@ public class GerenteModificacion extends javax.swing.JPanel {
     public GerenteModificacion(Banco banco) {
         initComponents();
         this.banco = banco;
-
         vistaComprobacion();
     }
 
+    /**
+     * Carga la vista de comprobar si un usuario existe.
+     */
     private void vistaComprobacion() {
         this.jLabel2.setVisible(false);
         this.jLabel3.setVisible(false);
@@ -38,6 +40,9 @@ public class GerenteModificacion extends javax.swing.JPanel {
         this.btnAceptar.setText("Aceptar");
     }
 
+    /**
+     * Carga la vista de modificar los datos de un titular.
+     */
     private void vistaModificacion() {
         this.jLabel2.setVisible(true);
         this.jLabel3.setVisible(true);
@@ -52,6 +57,11 @@ public class GerenteModificacion extends javax.swing.JPanel {
         cargarDatos(titular);
     }
 
+    /**
+     * Carga los datos de un titular en los cuadros de texto
+     *
+     * @param titular Titular
+     */
     private void cargarDatos(Titular titular) {
         txtDireccion.setText(titular.getDireccion());
         txtEmail.setText(titular.getEmail());
@@ -163,6 +173,46 @@ public class GerenteModificacion extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    /**
+     * Comprueba si un titular existe y si existe se pasa a la vista de
+     * modificacion.
+     */
+    private void comprobarTitular() {
+        String dni = txtDNI.getText();
+
+        if (banco.dniValido(dni)) {
+            if (banco.titularExiste(dni)) {
+                vistaModificacion();
+            } else {
+                ventanaAdvertencia("Titular no existe", "Error");
+            }
+        } else {
+            ventanaAdvertencia("DNI incorrecto", "Error");
+        }
+
+    }
+
+    /**
+     * Modifica los datos del titular con los datos que estan en los cuadros de
+     * texto.
+     */
+    private void modificarTitular() {
+        String dni = txtDNI.getText();
+        Titular titularActual = banco.getTitular(dni);
+
+        String nombre = txtNombre.getText();
+        String direccion = txtDireccion.getText();
+        String email = txtEmail.getText();
+
+        titularActual.setNombre(nombre);
+        titularActual.setDireccion(direccion);
+        titularActual.setEmail(email);
+
+        ventanaInformacion("Modificado correctamente", "Informacion");
+        vistaComprobacion();
+    }
+
+
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if (btnAceptar.getText().equals("Aceptar")) {
             limpiarTexto();
@@ -170,6 +220,26 @@ public class GerenteModificacion extends javax.swing.JPanel {
             reiniciarTexto();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    /**
+     * Limpia el texto del campo DNI
+     */
+    private void limpiarTexto() {
+        txtDNI.setText("");
+    }
+
+    /**
+     * Reinicia el texto de los cuadros de texto a los valores actuales del
+     * usuario.
+     */
+    private void reiniciarTexto() {
+        String dni = txtDNI.getText();
+        Titular titularActual = banco.getTitular(dni);
+
+        txtNombre.setText(titularActual.getNombre());
+        txtDireccion.setText(titularActual.getDireccion());
+        txtEmail.setText(titularActual.getEmail());
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -186,42 +256,11 @@ public class GerenteModificacion extends javax.swing.JPanel {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void comprobarTitular() {
-        String dni = txtDNI.getText();
-
-        if (banco.dniValido(dni)) {
-            if (banco.titularExiste(dni)) {
-                vistaModificacion();
-            } else {
-                ventanaAdvertencia("Titular no existe", "Error");
-            }
-        } else {
-            ventanaAdvertencia("DNI incorrecto", "Error");
-        }
-
-    }
-
-    private void modificarTitular() {
-        String dni = txtDNI.getText();
-        Titular titularActual = banco.getTitular(dni);
-        
-        String nombre = txtNombre.getText();
-        String direccion = txtDireccion.getText();
-        String email = txtEmail.getText();
-        
-        titularActual.setNombre(nombre);
-        titularActual.setDireccion(direccion);
-        titularActual.setEmail(email);
-        
-        ventanaInformacion("Modificado correctamente", "Informacion");
-        vistaComprobacion();
-    }
-
     /**
-     * Muestra una ventana de advertencia con un determinado titulo y mensaje
+     * Muestra una ventana de advertencia con un determinado titulo y mensaje.
      *
-     * @param mensaje Mensaje de la ventana
-     * @param titulo Titulo de la ventana
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
      */
     public void ventanaAdvertencia(String mensaje, String titulo) {
         String rutaImagen = "src/images/advertencia.png";
@@ -230,10 +269,10 @@ public class GerenteModificacion extends javax.swing.JPanel {
     }
 
     /**
-     * Muestra una ventana de informacion con un determinado titulo y mensaje
+     * Muestra una ventana de informacion con un determinado titulo y mensaje.
      *
-     * @param mensaje Mensaje de la ventana
-     * @param titulo Titulo de la ventana
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
      */
     public void ventanaInformacion(String mensaje, String titulo) {
         String rutaImagen = "src/images/informacion.png";
@@ -241,16 +280,4 @@ public class GerenteModificacion extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
     }
 
-    private void reiniciarTexto() {
-        String dni = txtDNI.getText();
-        Titular titularActual = banco.getTitular(dni);
-        
-        txtNombre.setText(titularActual.getNombre());
-        txtDireccion.setText(titularActual.getDireccion());
-        txtEmail.setText(titularActual.getEmail());
-    }
-
-    private void limpiarTexto() {
-        txtDNI.setText("");
-    }
 }

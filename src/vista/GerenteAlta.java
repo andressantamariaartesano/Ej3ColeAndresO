@@ -122,22 +122,8 @@ public class GerenteAlta extends javax.swing.JPanel {
         altaTitular();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtDNI;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNombre;
-    // End of variables declaration//GEN-END:variables
-
     /**
-     * Gurarda los datos en el caso de que sean correctos
+     * Gurarda los datos en el caso de que sean correctos.
      */
     private void altaTitular() {
         String dni = txtDNI.getText().trim();
@@ -156,13 +142,13 @@ public class GerenteAlta extends javax.swing.JPanel {
     }
 
     /**
-     * Comprueba que los datos sean correctos
+     * Comprueba que los datos sean correctos.
      *
      * @param dni DNI
      * @param nombre Nombre
      * @param direccion Direccion
      * @param email Email
-     * @return False si los datos no son correctos, True si son correctos
+     * @return False si los datos no son correctos, True si son correctos.
      */
     private boolean contenidoComprobado(String dni, String nombre, String direccion, String email) {
         boolean valido;
@@ -179,7 +165,7 @@ public class GerenteAlta extends javax.swing.JPanel {
     }
 
     /**
-     * Comprueba si los campos tienen texto en ellos
+     * Comprueba si los campos tienen texto en ellos.
      *
      * @param dni DNI
      * @param nombre Nombre
@@ -229,6 +215,25 @@ public class GerenteAlta extends javax.swing.JPanel {
         return valido;
     }
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtDNI;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNombre;
+    // End of variables declaration//GEN-END:variables
+
+    /**
+     * Muestra una ventana de advertencia con un determinado titulo y mensaje.
+     *
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
+     */
     private void ventanaAdvertencia(String mensaje, String titulo) {
         String rutaImagen = "src/images/advertencia.png";
         ImageIcon icono = new ImageIcon(rutaImagen);

@@ -9,7 +9,7 @@ import utilidades.Algoritmos;
 
 /**
  *
- * @author dam
+ * @author Andrés
  */
 public class Ventana extends javax.swing.JFrame {
 
@@ -260,7 +260,7 @@ public class Ventana extends javax.swing.JFrame {
      * Comprueba si el login esta vacio
      *
      * @return Ralse si tiene contenido el login y contraseña, true si esta
-     * vacio el login y contraseña
+     * vacio el login y contraseña.
      */
     private boolean loginVacio() {
         boolean vacio = false;
@@ -273,9 +273,9 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     /**
-     * Inicia sesión según el tipo de usuario que se ha logueado
+     * Inicia sesión según el tipo de usuario que se ha logueado.
      *
-     * @param tipo Tipo de usuario que se ha logueado
+     * @param tipo Tipo de usuario que se ha logueado.
      */
     private void iniciarSesion(Tipo tipo) {
         remove(panelLogin);
@@ -291,7 +291,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     /**
-     * Muestra los elementos del menú pertenecientes al gerente
+     * Muestra los elementos del menú pertenecientes al gerente.
      */
     private void mostrarMenuGerente() {
         mnuTransacciones.setVisible(false);
@@ -299,7 +299,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     /**
-     * Muestra los elementos del menú pertenecientes al cajero
+     * Muestra los elementos del menú pertenecientes al cajero.
      */
     private void mostrarMenuCajero() {
         mnuTitulares.setVisible(false);
@@ -416,10 +416,10 @@ public class Ventana extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     /**
-     * Muestra una ventana de advertencia con un determinado titulo y mensaje
+     * Muestra una ventana de advertencia con un determinado titulo y mensaje.
      *
-     * @param mensaje Mensaje de la ventana
-     * @param titulo Titulo de la ventana
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
      */
     public void ventanaAdvertencia(String mensaje, String titulo) {
         String rutaImagen = "src/images/advertencia.png";
@@ -427,6 +427,9 @@ public class Ventana extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
     }
 
+    /**
+     * Elimina cualquier panel que se esté ejecutando en la ventana.
+     */
     private void eliminarPaneles() {
         try {
             remove(gerenteAlta);

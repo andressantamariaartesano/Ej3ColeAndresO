@@ -34,6 +34,9 @@ public class GerentePrestamos extends javax.swing.JPanel {
         initComponents();
     }
 
+    /**
+     * Inicializa el combo box de los titulares.
+     */
     private void inicializarComboTitulares() {
         Vector listaTitulares = new Vector(banco.getTitulares());
         modeloComboTitulares = new DefaultComboBoxModel(listaTitulares);
@@ -154,21 +157,9 @@ public class GerentePrestamos extends javax.swing.JPanel {
         tramitarPrestamo();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JComboBox<String> cmbTitular;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField txtInteres;
-    private javax.swing.JTextField txtMonto;
-    private javax.swing.JTextField txtPlazo;
-    // End of variables declaration//GEN-END:variables
-
+    /**
+     * Tramita el préstamo si los datos son correctos.
+     */
     private void tramitarPrestamo() {
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("d/M/y");
         Titular titular = (Titular) cmbTitular.getSelectedItem(); // convierto el item seleccionado de un Object a un Titular, lo "casteo"
@@ -183,6 +174,15 @@ public class GerentePrestamos extends javax.swing.JPanel {
 
     }
 
+    /**
+     * Comprueba si los campos son váidos.
+     *
+     * @param titular Titular
+     * @param monto Monto
+     * @param interes Interes
+     * @param plazo Plazo
+     * @return True si con sorrectos, False si no son correctos.
+     */
     private boolean camposValidos(Titular titular, String monto, String interes, String plazo) {
         boolean valido;
 
@@ -192,15 +192,21 @@ public class GerentePrestamos extends javax.swing.JPanel {
             valido = false;
         } else if (!interesValido(interes)) {
             valido = false;
-        } else if (!plazoValido(plazo)){
+        } else if (!plazoValido(plazo)) {
             valido = false;
         } else {
             valido = true;
-        } 
-        
+        }
+
         return valido;
     }
 
+    /**
+     * Valida si el titular es válido
+     *
+     * @param titular Titular
+     * @return True si el titular es válido, false si el titular no es válido.
+     */
     private boolean titularValido(Titular titular) {
         boolean valido;
 
@@ -217,42 +223,47 @@ public class GerentePrestamos extends javax.swing.JPanel {
         return valido;
     }
 
-    private void ventanaAdvertencia(String mensaje, String titulo) {
-        String rutaImagen = "src/images/advertencia.png";
-        ImageIcon icono = new ImageIcon(rutaImagen);
-        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
-    }
-
+    /**
+     * Valida si el monto es válido.
+     *
+     * @param monto Monto
+     * @return True si el monto es válido, false si el monto no es válido.
+     */
     private boolean montoValido(String monto) {
         boolean valido;
 
         if (monto.equals("")) {
             ventanaAdvertencia("Introduce un monto", "Error");
             valido = false;
-        } else if (!esNumerico(monto)) {
+        } else if (!esDouble(monto)) {
             ventanaAdvertencia("El monto no es un número", "Error");
             valido = false;
         } else if (Double.parseDouble(monto) < 0) {
             ventanaAdvertencia("El monto tiene que ser positivo", "Error");
             valido = false;
-        } 
-        else {
+        } else {
             valido = true;
         }
 
         return valido;
     }
 
+    /**
+     * Valida si el interés es válido.
+     *
+     * @param interes Interés
+     * @return True si el interes es válido, false si el interes no es válido.
+     */
     private boolean interesValido(String interes) {
         boolean valido;
 
         if (interes.equals("")) {
             ventanaAdvertencia("Introduce un interes", "Error");
             valido = false;
-        } else if (!esNumerico(interes)) {
+        } else if (!esDouble(interes)) {
             ventanaAdvertencia("El interes no es un número", "Error");
             valido = false;
-        } else if (Double.parseDouble(interes) <= 0 && Double.parseDouble(interes) >= 1){
+        } else if (Double.parseDouble(interes) <= 0 && Double.parseDouble(interes) >= 1) {
             ventanaAdvertencia("El interes tiene que ser positivo", "Error");
             valido = false;
         } else {
@@ -261,8 +272,14 @@ public class GerentePrestamos extends javax.swing.JPanel {
 
         return valido;
     }
-    
-    private boolean esNumerico(String valor) {
+
+    /**
+     * Valida si un valor es double o no.
+     *
+     * @param valor
+     * @return
+     */
+    private boolean esDouble(String valor) {
         boolean valido;
 
         try {
@@ -271,19 +288,25 @@ public class GerentePrestamos extends javax.swing.JPanel {
         } catch (NumberFormatException ex) {
             valido = false;
         }
-        
+
         return valido;
     }
 
+    /**
+     * Valida si un plazo es válido.
+     *
+     * @param plazo Plazo
+     * @return True si el plazo es válido, false si no es válido.
+     */
     private boolean plazoValido(String plazo) {
         boolean valido;
-        if (plazo.isEmpty()){
+        if (plazo.isEmpty()) {
             ventanaAdvertencia("Introduce un plazo", "Error");
             valido = false;
-        } else if (!fechaValida(plazo)){
+        } else if (!fechaValida(plazo)) {
             ventanaAdvertencia("Introduce una fecha con el formato dd/mm/aaaa", "Error");
             valido = false;
-        } else if (!fechaMayorActual(plazo)){
+        } else if (!fechaMayorActual(plazo)) {
             ventanaAdvertencia("La fecha no puede ser menor a hoy", "Error");
             valido = false;
         } else {
@@ -292,35 +315,72 @@ public class GerentePrestamos extends javax.swing.JPanel {
         return valido;
     }
 
+    /**
+     * Valida si una fecha cumple un formato o no.
+     *
+     * @param plazo
+     * @return True si es válida, false si no es válida.
+     */
     private boolean fechaValida(String plazo) {
         boolean valido;
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("d/M/y");
-        
+
         try {
             LocalDate.parse(plazo, formatoFecha);
             valido = true;
-        } catch (DateTimeParseException ex){
+        } catch (DateTimeParseException ex) {
             valido = false;
         }
-        
+
         return valido;
     }
 
+    /**
+     * Valida si una fecha es mayor a la actual.
+     *
+     * @param plazo Fecha en cuestion.
+     * @return True si la fecha es mayor a la actual, false si es menor a la
+     * actual.
+     */
     private boolean fechaMayorActual(String plazo) {
         boolean valido;
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("d/M/y");
         LocalDate hoy = LocalDate.now();
         LocalDate fechaPlazo = LocalDate.parse(plazo, formatoFecha);
-        
+
         if (hoy.compareTo(fechaPlazo) < 0) {
             valido = true;
         } else {
             valido = false;
         }
-        
+
         return valido;
     }
 
-   
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JComboBox<String> cmbTitular;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtInteres;
+    private javax.swing.JTextField txtMonto;
+    private javax.swing.JTextField txtPlazo;
+    // End of variables declaration//GEN-END:variables
+
+    /**
+     * Muestra una ventana de advertencia con un determinado titulo y mensaje.
+     *
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
+     */
+    private void ventanaAdvertencia(String mensaje, String titulo) {
+        String rutaImagen = "src/images/advertencia.png";
+        ImageIcon icono = new ImageIcon(rutaImagen);
+        JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
 
 }

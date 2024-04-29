@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
  * @author dam
  */
 public class GerenteAperturaCuentas extends javax.swing.JPanel {
+
     Banco banco;
+
     /**
      * Creates new form GerenteAperturaCuentas
      */
@@ -108,42 +110,45 @@ public class GerenteAperturaCuentas extends javax.swing.JPanel {
         limpiarTexto();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        abrirCuenta();
-    }//GEN-LAST:event_btnAceptarActionPerformed
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField txtDNI;
-    private javax.swing.JTextField txtNumeroCuenta;
-    private javax.swing.JTextField txtSaldo;
-    // End of variables declaration//GEN-END:variables
-
+    /**
+     * Limpia el texto de todos los campos.
+     */
     private void limpiarTexto() {
         txtDNI.setText("");
         txtNumeroCuenta.setText("");
         txtSaldo.setText("");
     }
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        abrirCuenta();
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    /**
+     * Abre una cuenta si todos los datos son correctos.
+     */
     private void abrirCuenta() {
         String numeroCuenta = txtNumeroCuenta.getText();
         String dni = txtDNI.getText();
         String saldo = txtSaldo.getText();
-        
+
         if (contenidoComprobado(numeroCuenta, dni, saldo)) {
             banco.guardarCuenta(numeroCuenta, dni, Double.parseDouble(saldo));
             this.ventanaAdvertencia("Cuenta agregada", "Informacion");
         }
     }
 
+    /**
+     * Comprueba si el contenido es correcto.
+     *
+     * @param numeroCuenta Numero de cuenta
+     * @param dni DNI
+     * @param saldo Saldo de esa cuenta
+     * @return True si el contenido es correcto, False si el contendio no es
+     * correcto.
+     */
     private boolean contenidoComprobado(String numeroCuenta, String dni, String saldo) {
         boolean valido;
-        
+
         if (camposVacios(numeroCuenta, dni, saldo)) {
             valido = false;
         } else if (!camposValidos(numeroCuenta, dni, saldo)) {
@@ -151,18 +156,18 @@ public class GerenteAperturaCuentas extends javax.swing.JPanel {
         } else {
             valido = true;
         }
-        
+
         return valido;
     }
-    
+
     /**
-     * Comprueba si los campos tienen texto en ellos
+     * Comprueba si todos los campos tienen texto en ellos.
      *
      * @param dni DNI
      * @param nombre Nombre
      * @param direccion Direccion
      * @param email Email
-     * @return True si tienen texto en ellos
+     * @return True si tienen texto en ellos, False si no tienen texto en ellos.
      */
     private boolean camposVacios(String numeroCuenta, String dni, String saldo) {
         boolean vacio;
@@ -182,51 +187,79 @@ public class GerenteAperturaCuentas extends javax.swing.JPanel {
 
         return vacio;
     }
-    
-    
 
+    /**
+     * Comprueba si el contenido de los campos es correcto.
+     *
+     * @param numeroCuenta Numero de cuenta
+     * @param dni DNI
+     * @param saldo Saldo
+     * @return True si el contenido de los campos son válidos, False si el
+     * contenido no es válido.
+     */
     private boolean camposValidos(String numeroCuenta, String dni, String saldo) {
         boolean valido;
-        
+
         if (banco.cuentaExistente(numeroCuenta)) {
             valido = false;
             ventanaAdvertencia("Cuenta existente", "Error");
-        } else if (!banco.dniValido(dni)){
+        } else if (!banco.dniValido(dni)) {
             valido = false;
             ventanaAdvertencia("DNI no válido", "Error");
         } else if (!banco.titularExiste(dni)) {
             valido = false;
             ventanaAdvertencia("Ningun titular tiene ese DNI", "Error");
-        } else if (!saldoValido(saldo)){
+        } else if (!saldoValido(saldo)) {
             valido = false;
             ventanaAdvertencia("Saldo no válido", "Error");
         } else {
             valido = true;
         }
-        
+
         return valido;
     }
-    
+
+    /**
+     * Verifica que el saldo es válido.
+     *
+     * @param saldo Saldo
+     * @return True si el saldo
+     */
+    private boolean saldoValido(String saldo) {
+        boolean valido;
+        double saldoNumerico;
+
+        try {
+            saldoNumerico = Double.parseDouble(saldo);
+            valido = saldoNumerico > 0;
+        } catch (NumberFormatException ex) {
+            valido = false;
+        }
+
+        return valido;
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField txtDNI;
+    private javax.swing.JTextField txtNumeroCuenta;
+    private javax.swing.JTextField txtSaldo;
+    // End of variables declaration//GEN-END:variables
+
+    /**
+     * Muestra una ventana de advertencia con un determinado titulo y mensaje.
+     *
+     * @param mensaje Mensaje de la ventana.
+     * @param titulo Titulo de la ventana.
+     */
     private void ventanaAdvertencia(String mensaje, String titulo) {
         String rutaImagen = "src/images/advertencia.png";
         ImageIcon icono = new ImageIcon(rutaImagen);
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
     }
 
-    private boolean saldoValido(String saldo) {
-        boolean valido;
-        double saldoNumerico;
-        
-        try {
-            saldoNumerico = Double.parseDouble(saldo);
-            valido = saldoNumerico > 0;
-            
-        } catch(NumberFormatException ex){
-            valido = false;
-        }
-        
-        return valido;
-    }
-
-    
 }
