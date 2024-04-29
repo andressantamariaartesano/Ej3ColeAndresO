@@ -134,6 +134,7 @@ public class GerenteAperturaCuentas extends javax.swing.JPanel {
         if (contenidoComprobado(numeroCuenta, dni, saldo)) {
             banco.guardarCuenta(numeroCuenta, dni, Double.parseDouble(saldo));
             this.ventanaAdvertencia("Cuenta agregada", "Informacion");
+            limpiarTexto();
         }
     }
 

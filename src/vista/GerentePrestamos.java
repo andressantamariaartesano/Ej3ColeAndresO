@@ -41,7 +41,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
         Vector listaTitulares = new Vector(banco.getTitulares());
         modeloComboTitulares = new DefaultComboBoxModel(listaTitulares);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,10 +147,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        cmbTitular.setSelectedIndex(-1);
-        txtMonto.setText("");
-        txtInteres.setText("");
-        txtPlazo.setText("");
+        limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
@@ -170,6 +167,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
         if (camposValidos(titular, monto, interes, plazo)) {
             titular.guardarPrestamo(Double.parseDouble(monto), Double.parseDouble(interes), LocalDate.parse(plazo, formatoFecha));
             ventanaAdvertencia("Prestamo tramitado", "Informacion");
+            limpiarCampos();
         }
 
     }
@@ -381,6 +379,16 @@ public class GerentePrestamos extends javax.swing.JPanel {
         String rutaImagen = "src/images/advertencia.png";
         ImageIcon icono = new ImageIcon(rutaImagen);
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.WARNING_MESSAGE, icono);
+    }
+
+    /**
+     * Limpia todos los campos.
+     */
+    private void limpiarCampos() {
+        cmbTitular.setSelectedIndex(-1);
+        txtMonto.setText("");
+        txtInteres.setText("");
+        txtPlazo.setText("");
     }
 
 }

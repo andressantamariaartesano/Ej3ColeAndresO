@@ -60,6 +60,24 @@ public class Cuenta {
         final Cuenta other = (Cuenta) obj;
         return Objects.equals(this.numero, other.numero);
     }
+
+    @Override
+    public String toString() {
+        return numero + " - " + titular.getDni();
+    }
+
+    public void ingresarSaldo(double monto) {
+        this.saldo += monto;
+    }
+
+    public void retirarSaldo(double monto) {
+        this.saldo -= monto;
+    }
+
+    public boolean puedeRetirar(double monto) {
+        return this.saldo > monto;
+    }
+    
     
     
     

@@ -19,7 +19,7 @@ public class Ventana extends javax.swing.JFrame {
     GerenteModificacion gerenteModificacion;
     GerenteAperturaCuentas gerenteAperturaCuentas;
     GerentePrestamos gerentePrestamos;
-
+    CajeroTransacciones cajeroTransacciones;
     /**
      * Creates new form Window
      */
@@ -59,9 +59,6 @@ public class Ventana extends javax.swing.JFrame {
         mnuAperturaCuentas = new javax.swing.JMenu();
         mnuGestionPrestamos = new javax.swing.JMenu();
         mnuTransacciones = new javax.swing.JMenu();
-        mnuIngresarTransacciones = new javax.swing.JMenuItem();
-        mnuRetirarTransacciones = new javax.swing.JMenuItem();
-        mnuConsultaTransacciones = new javax.swing.JMenuItem();
         mnuPrestamos = new javax.swing.JMenu();
         mnuEstadoPrestamos = new javax.swing.JMenuItem();
         mnuValidarPrestamos = new javax.swing.JMenuItem();
@@ -69,6 +66,7 @@ public class Ventana extends javax.swing.JFrame {
         mnuSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestion Bancaria");
         setSize(new java.awt.Dimension(850, 480));
 
         jLabel1.setText("Usuario");
@@ -179,16 +177,11 @@ public class Ventana extends javax.swing.JFrame {
         jMenuBar1.add(mnuGestionPrestamos);
 
         mnuTransacciones.setText("Transacciones");
-
-        mnuIngresarTransacciones.setText("Ingresar");
-        mnuTransacciones.add(mnuIngresarTransacciones);
-
-        mnuRetirarTransacciones.setText("Retirar");
-        mnuTransacciones.add(mnuRetirarTransacciones);
-
-        mnuConsultaTransacciones.setText("Consulta");
-        mnuTransacciones.add(mnuConsultaTransacciones);
-
+        mnuTransacciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuTransaccionesMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(mnuTransacciones);
 
         mnuPrestamos.setText("Prestamos");
@@ -353,6 +346,14 @@ public class Ventana extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_mnuSalirMouseClicked
 
+    private void mnuTransaccionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuTransaccionesMouseClicked
+        eliminarPaneles();
+
+        cajeroTransacciones = new CajeroTransacciones(banco);
+        add(cajeroTransacciones).setVisible(true);
+        pack();
+    }//GEN-LAST:event_mnuTransaccionesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -399,13 +400,10 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenu mnuAperturaCuentas;
     private javax.swing.JMenu mnuCerrarSesion;
     private javax.swing.JMenuItem mnuConsultaTitulares;
-    private javax.swing.JMenuItem mnuConsultaTransacciones;
     private javax.swing.JMenuItem mnuEstadoPrestamos;
     private javax.swing.JMenu mnuGestionPrestamos;
-    private javax.swing.JMenuItem mnuIngresarTransacciones;
     private javax.swing.JMenuItem mnuModificacionTitulares;
     private javax.swing.JMenu mnuPrestamos;
-    private javax.swing.JMenuItem mnuRetirarTransacciones;
     private javax.swing.JMenu mnuSalir;
     private javax.swing.JMenu mnuTitulares;
     private javax.swing.JMenu mnuTransacciones;
@@ -453,6 +451,11 @@ public class Ventana extends javax.swing.JFrame {
         }
         try {
             remove(gerentePrestamos);
+            pack();
+        } catch (java.lang.NullPointerException ex) {
+        }
+        try {
+            remove(cajeroTransacciones);
             pack();
         } catch (java.lang.NullPointerException ex) {
         }

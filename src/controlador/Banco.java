@@ -161,6 +161,11 @@ public class Banco {
         return correcto;
     }
 
+    /**
+     * Comprueba si un titular existe.
+     * @param dni DNI del titular
+     * @return True si existe, false si no existe.
+     */
     public boolean titularExiste(String dni) {
         boolean existe;
 
@@ -169,12 +174,23 @@ public class Banco {
         return existe;
     }
 
+    /**
+     * Guarda la cuenta.
+     * @param numeroCuenta Numero de cuenta
+     * @param dni DNI del titular
+     * @param saldo Saldo
+     */
     public void guardarCuenta(String numeroCuenta, String dni, double saldo) {
         Titular titular = titulares.get(titulares.indexOf(new Titular(dni)));
         
         cuentas.add(new Cuenta(numeroCuenta, titular, saldo));
     }
 
+    /**
+     * Comprueba si una cuenta existe.
+     * @param numeroCuenta
+     * @return True si la cuenta existe, false si la cuenta no existe.
+     */
     public boolean cuentaExistente(String numeroCuenta) {
         boolean existe;
 

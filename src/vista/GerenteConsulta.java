@@ -23,6 +23,7 @@ public class GerenteConsulta extends javax.swing.JPanel {
         this.banco = banco;
         inicializarModeloTabla();
         initComponents();
+        jTable1.setEnabled(false);
     }
 
     /**
@@ -33,27 +34,25 @@ public class GerenteConsulta extends javax.swing.JPanel {
         String[] columnas = {"DNI", "Nombre", "Direccion", "e-mail"}; 
         tablaTitulares = new DefaultTableModel(datos, columnas);
         annadirFilas();
-        
     }
 
     /**
      * Añade los titulares al modelo de la tabla.
      */
     private void annadirFilas() {
-        String[] fila;
+        Object[] fila;
         String dni, nombre, direccion, email;
-        
-        for (int i = 0; i < banco.getTitulares().size(); i++) {
+        int titularesTamanno = banco.getTitulares().size();
+        for (int i = 0; i < titularesTamanno; i++) {
             dni = banco.getTitulares().get(i).getDni();
             nombre = banco.getTitulares().get(i).getNombre();
             direccion = banco.getTitulares().get(i).getDireccion();
             email = banco.getTitulares().get(i).getEmail();
             
-            fila = new String[]{dni, nombre, direccion, email};
+            fila = new Object[]{dni, nombre, direccion, email};
             
             tablaTitulares.addRow(fila);
         }
-        
     }
     
     /**
