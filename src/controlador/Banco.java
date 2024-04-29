@@ -34,11 +34,17 @@ public class Banco {
         cuentas.add(new Cuenta("123", titulares.get(0), 123.0));
     }
 
+    /**
+     * Inicializa los tipos de usuarios.
+     */
     private void inicializarTipos() {
         tipos.add(new Tipo(1, "Gerente"));
         tipos.add(new Tipo(2, "Cajero"));
     }
 
+    /**
+     * Inicializa los usuarios.
+     */
     private void inicializarUsuarios() {
         usuarios.add(new Usuario("admin", Algoritmos.getMD5("admin"), tipos.get(0), 1));
         usuarios.add(new Usuario("andres", Algoritmos.getMD5("1234"), tipos.get(1), 2));
@@ -106,6 +112,13 @@ public class Banco {
         return correcto;
     }
 
+    /**
+     * Guarda un titular.
+     * @param dni DNI
+     * @param nombre Nombre
+     * @param direccion Direccion
+     * @param email e-mail
+     */
     public void guardarTitular(String dni, String nombre, String direccion, String email) {
         titulares.add(new Titular(dni, nombre, direccion, email));
     }

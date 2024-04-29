@@ -66,14 +66,27 @@ public class Cuenta {
         return numero + " - " + titular.getDni();
     }
 
+    /**
+     * Ingresa saldo a la cuenta.
+     * @param monto Monto a ingresar.
+     */
     public void ingresarSaldo(double monto) {
         this.saldo += monto;
     }
 
+    /**
+     * Retira saldo a la cuenta.
+     * @param monto Monto a retirar.
+     */
     public void retirarSaldo(double monto) {
         this.saldo -= monto;
     }
 
+    /**
+     * Verifica si puede o no retirar saldo.
+     * @param monto Monto a validar
+     * @return True si puede retirar, False si no puede retirar.
+     */
     public boolean puedeRetirar(double monto) {
         return this.saldo > monto;
     }
