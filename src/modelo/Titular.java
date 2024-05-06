@@ -24,6 +24,7 @@ public class Titular {
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
+        this.prestamo = new Prestamo();
     }
 
     public Titular(String dni) {
@@ -93,6 +94,12 @@ public class Titular {
         return dni + " - " + nombre;
     }
 
+    /**
+     * Gurarda el prestamo con los datos indicados.
+     * @param monto Monto
+     * @param interes Interés
+     * @param fecha Fecha
+     */
     public void guardarPrestamo(double monto, double interes, LocalDate fecha) {
         prestamo = new Prestamo(monto, interes, fecha);
     }

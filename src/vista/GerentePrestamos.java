@@ -211,7 +211,7 @@ public class GerentePrestamos extends javax.swing.JPanel {
         if (titular == null) {
             ventanaAdvertencia("Selecciona un titular", "Error");
             valido = false;
-        } else if (titular.getPrestamo() != null) {
+        } else if (titular.getPrestamo().isActivo()) {
             ventanaAdvertencia(titular.toString() + " ya tiene un préstamo a su nombre.", "Error");
             valido = false;
         } else {

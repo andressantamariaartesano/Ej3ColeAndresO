@@ -14,11 +14,17 @@ public class Prestamo {
     private double monto;
     private double tasaInteres;
     private LocalDate plazo;
+    private boolean activo;
 
+    public Prestamo() {
+        activo = false;
+    }
+    
     public Prestamo(double monto, double tasaInteres, LocalDate plazo) {
         this.monto = monto;
         this.tasaInteres = tasaInteres;
         this.plazo = plazo;
+        activo = true;
     }
 
     public double getMonto() {
@@ -32,6 +38,16 @@ public class Prestamo {
     public LocalDate getPlazo() {
         return plazo;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
     
     
     
